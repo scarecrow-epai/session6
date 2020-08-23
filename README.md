@@ -1,4 +1,4 @@
-#Session 6
+# Session 6
 
 This is the readme for session-6.
 This file contains information for functions present in `session6.py` and `test_session6.py`.
