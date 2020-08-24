@@ -1,4 +1,4 @@
-# Session 6
+#Session 6
 
 This is the readme for session-6.
 This file contains information for functions present in `session6.py` and `test_session6.py`.
@@ -15,17 +15,12 @@ pytest -v
 
  The function definitions are as follows: 
 
-### create_deck_2(lst1: "list", lst2:"list")
+### create_deck_2(lst1: "list", lst2: "list")
 
 
     Create a deck of 52 cards for answer 2. Use Nested loops
 
-### check_winner(cards1:"list of tuples", cards2:"list of tuples")
-
-
-    Check winner between 2 hands of cards by testing various combos.
-
-### is_royal_flush(cards:"list of tuples") -> "Bool"
+### is_royal_flush(cards: "list of tuples") -> "Bool"
 
 
     Helper function to identify royal flush.
@@ -65,17 +60,21 @@ pytest -v
 
     Helper function to identify one pair.
 
-### is_full_house(cards:"list of tuples") -> "Bool"
+### is_full_house(cards: "list of tuples") -> "Bool"
 
 
     Helper function to identify full house.
+
+### check_winner(cards1: "list of tuples", cards2: "list of tuples") -> "integers1, 0, -1"
+
+
+    Check winner between 2 hands of cards by testing various combos.
 
 
 ## Functions in `test_session6.py`.
 
 
 The test definitions are as follows: 
-
 
 ### test_create_deck_1()
 
@@ -110,7 +109,7 @@ The test definitions are as follows:
 ### test_indentations()
 
 
-   Returns pass if used four spaces for each level of syntactically \
+    Returns pass if used four spaces for each level of syntactically \
 
 ### test_function_name_had_cap_letter()
 
@@ -266,4 +265,9 @@ The test definitions are as follows:
 
 
     Test high card function. If a hand is none of the other functions, 
+
+### test_check_winner()
+
+
+    Test the runner function to eval winner between 2 decks.
 

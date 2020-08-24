@@ -7,10 +7,10 @@ suits = ["spades", "clubs", "hearts", "diamonds"]
 
 royal_flush = ["jack", "queen", "king", "ace"]
 
-create_deck_1 = list(map(lambda x: x, zip(vals*len(suits), suits*len(vals))))
+create_deck_1 = list(map(lambda x: x, zip(vals * len(suits), suits * len(vals))))
 
 
-def create_deck_2(lst1: "list", lst2:"list"):
+def create_deck_2(lst1: "list", lst2: "list"):
     """
     Create a deck of 52 cards for answer 2. Use Nested loops
     to to create all combos.
@@ -25,27 +25,7 @@ def create_deck_2(lst1: "list", lst2:"list"):
     return deck_list
 
 
-def check_winner(cards1:"list of tuples", cards2:"list of tuples"):
-    """
-    Check winner between 2 hands of cards by testing various combos.
-    Inp
-    """
-    if len(cards1) != len(cards2):
-        raise ValueError("Card length should be same.")
-
-    if len(cards1) < 3 or len(cards1) > 5:
-        raise ValueError("Number of cards can be atmost 5.")
-
-    cards1 = sorted(cards1, key=lambda x: vals.index(x[0]), reverse=True)
-    cards2 = sorted(cards2, key=lambda x: vals.index(x[0]), reverse=True)
-
-    royal_flush = is_royal_flush(cards1) or is_royal_flush(cards2)
-    straight_flush = is_straight_flush(cards1) or is_straight_flush(cards2)
-
-    return royal_flush, straight_flush
-
-
-def is_royal_flush(cards:"list of tuples") -> "Bool":
+def is_royal_flush(cards: "list of tuples") -> "Bool":
     """
     Helper function to identify royal flush.
     Return false if all suits are not the same. Else, check for 
@@ -167,7 +147,7 @@ def is_one_pair(cards: "list of tuples") -> "Bool":
     return temp_pair_count == 1
 
 
-def is_full_house(cards:"list of tuples") -> "Bool":
+def is_full_house(cards: "list of tuples") -> "Bool":
     """
     Helper function to identify full house.
     Count full house by creating a temp counter dict.
@@ -186,3 +166,73 @@ def is_full_house(cards:"list of tuples") -> "Bool":
             temp_two_count += 1
 
     return temp_three_count and temp_two_count
+
+
+def check_winner(
+    cards1: "list of tuples", cards2: "list of tuples"
+) -> "integers1, 0, -1":
+    """
+    Check winner between 2 hands of cards by testing various combos.
+        Input: Twop decks of cards (of lengths 3/4/5)
+        Output:
+            0: if player one wins.
+            1: if player two wins.
+            -1: No winner. Tie.
+    """
+    if len(cards1) != len(cards2):
+        raise ValueError("Card length should be same.")
+
+    if len(cards1) < 3 or len(cards1) > 5:
+        raise ValueError("Number of cards can be atmost 5.")
+
+    cards1 = sorted(cards1, key=lambda x: vals.index(x[0]), reverse=True)
+    cards2 = sorted(cards2, key=lambda x: vals.index(x[0]), reverse=True)
+
+    check_list = [
+        is_royal_flush,
+        is_straight_flush,
+        is_four_of_a_kind,
+        is_full_house,
+        is_flush,
+        is_straight,
+        is_three_of_a_kind,
+        is_two_pair,
+        is_one_pair,
+    ]
+    cards1_result = []
+    cards2_result = []
+
+    for check_func in check_list:
+        cards1_result.append(int(check_func(cards1)))
+        cards2_result.append(int(check_func(cards2)))
+
+    for i, j in zip(cards1_result, cards2_result):
+        if i > j:
+            return 0
+        if i < j:
+            return 1
+        else:
+            pass
+
+        return -1
+
+
+cards1 = [
+    ("ace", "hearts"),
+    ("king", "hearts"),
+    ("queen", "hearts"),
+    ("jack", "hearts"),
+    ("10", "hearts"),
+]
+
+
+cards2 = [
+    ("2", "hearts"),
+    ("king", "hearts"),
+    ("3", "spades"),
+    ("jack", "clubs"),
+    ("10", "hearts"),
+]
+
+
+print(check_winner(cards1, cards2))

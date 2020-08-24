@@ -198,9 +198,9 @@ def test_readme_file_for_formatting():
 
 def test_indentations():
     """ 
-   Returns pass if used four spaces for each level of syntactically \
-   significant indenting.
-   """
+    Returns pass if used four spaces for each level of syntactically \
+    significant indenting.
+    """
     lines = inspect.getsource(session6)
     spaces = re.findall("\n +.", lines)
     for space in spaces:
@@ -648,3 +648,27 @@ def test_high_card_3cards():
         or session6.is_one_pair(temp_hand)
         or session6.is_full_house(temp_hand) == False
     )
+
+
+def test_check_winner():
+    """
+    Test the runner function to eval winner between 2 decks.
+    """
+
+    cards1 = [
+        ("ace", "hearts"),
+        ("king", "hearts"),
+        ("queen", "hearts"),
+        ("jack", "hearts"),
+        ("10", "hearts"),
+    ]
+
+    cards2 = [
+        ("2", "hearts"),
+        ("king", "hearts"),
+        ("3", "spades"),
+        ("jack", "clubs"),
+        ("10", "hearts"),
+    ]
+
+    assert session6.check_winner(cards1, cards2) == 0
